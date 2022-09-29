@@ -1,13 +1,16 @@
 import React, { useState } from 'react';
 
 // Components
-import { ButtonCustom } from '../../atoms';
+import { ButtonCustom, TextCustom } from '../../atoms';
 import { CardTarea } from '../../molecules';
 import {
   DialogTareaAdd,
   DialogTareaDelete,
   DialogTareaEdit,
 } from '../../organisms';
+
+// Const
+import { tareas } from '../../../common/constants';
 
 const Tareas = () => {
   const [showEdit, setShowEdit] = useState(false);
@@ -31,7 +34,7 @@ const Tareas = () => {
   };
   return (
     <div>
-      <h1>Tareas</h1>
+      <TextCustom text="Aplicación de tareas" className="text-3xl fontPBold" />
       <div className="flex justify-end">
         <ButtonCustom
           text="Crear Tarea"
@@ -40,18 +43,15 @@ const Tareas = () => {
         />
       </div>
       <div className="flex flex-col gap-2">
-        <CardTarea
-          id={'1'}
-          titulo="Preparar el desayuno"
-          descripcion="Hacer panqueques con miel."
-          onClick={handleAction}
-        />
-        <CardTarea
-          id={'2'}
-          titulo="Preparar el almuerzo"
-          descripcion="Hacer arroz con pollo."
-          onClick={handleAction}
-        />
+        {tareas.map(tarea => (
+          <CardTarea
+            key={tarea.idTarea}
+            id={tarea.idTarea}
+            titulo={tarea.title}
+            descripcion={tarea.description}
+            onClick={handleAction}
+          />
+        ))}
       </div>
       <DialogTareaAdd open={showAdd} setOpen={setShowAdd} />
       <DialogTareaEdit

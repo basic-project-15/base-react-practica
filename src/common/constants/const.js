@@ -37,3 +37,21 @@ export const comidas = [
     precio: '$ 3.50',
   },
 ];
+
+export const tareas = [
+  {
+    idTarea: '1',
+    title: 'Preparar el desayuno',
+    description: 'Hacer panqueques con miel.',
+  },
+  {
+    idTarea: '2',
+    title: 'Preparar el almuerzo',
+    description: 'Hacer arroz con pollo.',
+  },
+  {
+    idTarea: '3',
+    title: 'Preparar la cena',
+    description: 'Hacer baleadas con huevo.',
+  },
+];

@@ -1,4 +1,4 @@
-export { drawerWidth, comidas } from './const';
+export { drawerWidth, comidas, tareas } from './const';
 export {
   constGeneros,
   constTiposIdentidad,
