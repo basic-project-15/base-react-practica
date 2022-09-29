@@ -5,8 +5,7 @@ import { DialogActions, DialogContent } from '@mui/material';
 import { DialogCustom } from '../../templates';
 import { ButtonCustom, TextInputCustom } from '../../atoms';
 
-const DialogTareaEdit = ({
-  idTarea = '',
+const DialogTareaAdd = ({
   open = false,
   setOpen = () => null,
   onDismiss = () => null,
@@ -28,7 +27,7 @@ const DialogTareaEdit = ({
     <DialogCustom
       open={open}
       setOpen={setOpen}
-      title="Editar Tarea"
+      title="Crear Tarea"
       onDismiss={onDismiss}
     >
       <DialogContent style={{ width: 500 }}>
@@ -63,4 +62,4 @@ const DialogTareaEdit = ({
   );
 };
 
-export default DialogTareaEdit;
+export default DialogTareaAdd;
