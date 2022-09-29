@@ -40,7 +40,7 @@ export const apiGetTask = async params => {
   };
 
   const request = {
-    idTarea: params.idTarea,
+    idTask: params.idTarea,
   };
 
   try {
@@ -69,6 +69,36 @@ export const apiPostTask = async params => {
   };
 
   const request = {
+    title: params.title,
+    description: params.description,
+  };
+
+  try {
+    const response = await axios[method](url, request, buildRequest());
+    const { status, data } = response;
+    dataResponse.success = true;
+    dataResponse.data = data.data;
+    dataResponse.statusCode = status;
+  } catch (error) {
+    dataResponse.message = error.response.data.message;
+    dataResponse.data = error;
+    dataResponse.statusCode = error.response?.status;
+  }
+  return dataResponse;
+};
+
+export const apiPatchTask = async params => {
+  const url = `${process.env.REACT_APP_api}${typesEndpoint.patchTarea}`;
+  const method = 'patch';
+  const dataResponse = {
+    success: false,
+    statusCode: 0,
+    message: '',
+    data: [],
+  };
+
+  const request = {
+    idTask: params.idTarea,
     title: params.title,
     description: params.description,
   };

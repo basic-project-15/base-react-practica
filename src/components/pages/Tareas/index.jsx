@@ -36,6 +36,7 @@ const Tareas = () => {
 
   const cargarTareas = async () => {
     resetAlert();
+    setIdTarea('');
     setLoader(true);
     const response = await apiGetTasks();
     const { success, message, data } = response;
@@ -104,7 +105,7 @@ const Tareas = () => {
         idTarea={idTarea}
         open={showEdit}
         setOpen={setShowEdit}
-        onDismiss={() => setIdTarea('0')}
+        onDismiss={cargarTareas}
       />
       <DialogTareaDelete
         idTarea={idTarea}

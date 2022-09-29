@@ -3,5 +3,6 @@ export {
   apiGetTasks,
   apiGetTask,
   apiPostTask,
+  apiPatchTask,
   apiDeleteTask,
 } from './tasks/apiTask';

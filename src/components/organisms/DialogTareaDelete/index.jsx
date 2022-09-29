@@ -37,6 +37,7 @@ const DialogTareaDelete = ({
 
   const resetForm = () => {
     resetAlert();
+    setShowAlert();
     setTitle('');
     setLoader(false);
   };

@@ -42,6 +42,7 @@ const DialogTareaAdd = ({
 
   const resetForm = () => {
     resetAlert();
+    setShowAlert();
     resetFormErrors();
     resetFormSuccess();
     setTitle('');
