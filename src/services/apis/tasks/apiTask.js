@@ -29,6 +29,35 @@ export const apiGetTasks = async params => {
   return dataResponse;
 };
 
+export const apiGetTask = async params => {
+  const url = `${process.env.REACT_APP_api}${typesEndpoint.getTarea}`;
+  const method = 'get';
+  const dataResponse = {
+    success: false,
+    statusCode: 0,
+    message: '',
+    data: [],
+  };
+
+  const request = {
+    idTarea: params.idTarea,
+  };
+
+  try {
+    const response = await axios[method](url, buildRequest(request));
+    const { status, data } = response;
+    dataResponse.success = true;
+    dataResponse.data = data.data;
+    dataResponse.statusCode = status;
+  } catch (error) {
+    dataResponse.message =
+      'No se pudieron cargar las tareas, intentelo más tarde.';
+    dataResponse.data = error;
+    dataResponse.statusCode = error.response?.status;
+  }
+  return dataResponse;
+};
+
 export const apiPostTask = async params => {
   const url = `${process.env.REACT_APP_api}${typesEndpoint.postTarea}`;
   const method = 'post';
@@ -46,6 +75,34 @@ export const apiPostTask = async params => {
 
   try {
     const response = await axios[method](url, request, buildRequest());
+    const { status, data } = response;
+    dataResponse.success = true;
+    dataResponse.data = data.data;
+    dataResponse.statusCode = status;
+  } catch (error) {
+    dataResponse.message = error.response.data.message;
+    dataResponse.data = error;
+    dataResponse.statusCode = error.response?.status;
+  }
+  return dataResponse;
+};
+
+export const apiDeleteTask = async params => {
+  const url = `${process.env.REACT_APP_api}${typesEndpoint.deleteTarea}`;
+  const method = 'delete';
+  const dataResponse = {
+    success: false,
+    statusCode: 0,
+    message: '',
+    data: [],
+  };
+
+  const request = {
+    idTask: params.idTarea,
+  };
+
+  try {
+    const response = await axios[method](url, buildRequest(request));
     const { status, data } = response;
     dataResponse.success = true;
     dataResponse.data = data.data;

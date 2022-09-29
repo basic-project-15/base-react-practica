@@ -110,6 +110,7 @@ const Tareas = () => {
         idTarea={idTarea}
         open={showDelete}
         setOpen={setShowDelete}
+        onDismiss={cargarTareas}
       />
     </div>
   );
