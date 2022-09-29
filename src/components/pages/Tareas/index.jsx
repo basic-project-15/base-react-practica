@@ -1,7 +1,10 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+
+// Hooks
+import { useForm } from '../../../hooks/others';
 
 // Components
-import { ButtonCustom, TextCustom } from '../../atoms';
+import { AlertCustom, ButtonCustom, Loader, TextCustom } from '../../atoms';
 import { CardTarea } from '../../molecules';
 import {
   DialogTareaAdd,
@@ -10,13 +13,44 @@ import {
 } from '../../organisms';
 
 // Const
-import { tareas } from '../../../common/constants';
+import { apiGetTasks } from '../../../services/apis';
 
 const Tareas = () => {
   const [showEdit, setShowEdit] = useState(false);
   const [showAdd, setShowAdd] = useState(false);
   const [showDelete, setShowDelete] = useState(false);
-  const [idTarea, setIdTarea] = useState('0');
+  const [idTarea, setIdTarea] = useState('');
+  const [tareas, setTareas] = useState([]);
+  const [loader, setLoader] = useState(false);
+  const [showAlert, setShowAlert] = useState(false);
+  const [alert, setAlert, resetAlert] = useForm({
+    title: '',
+    description: '',
+    severity: 'info',
+  });
+
+  useEffect(() => {
+    cargarTareas();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  const cargarTareas = async () => {
+    resetAlert();
+    setLoader(true);
+    const response = await apiGetTasks();
+    const { success, message, data } = response;
+    if (success) {
+      setTareas(data.tasks);
+    } else {
+      setShowAlert(true);
+      setAlert({
+        title: 'Error',
+        description: message,
+        severity: 'error',
+      });
+    }
+    setLoader(false);
+  };
 
   const handleAction = (type = '', id = '') => {
     setIdTarea(id);
@@ -42,16 +76,24 @@ const Tareas = () => {
           onClick={() => setShowAdd(true)}
         />
       </div>
-      <div className="flex flex-col gap-2">
+      <AlertCustom
+        title={alert.title}
+        description={alert.description}
+        open={showAlert}
+        setOpen={setShowAlert}
+        severity={alert.severity}
+      />
+      <div className="flex flex-col gap-2 relative">
         {tareas.map(tarea => (
           <CardTarea
-            key={tarea.idTarea}
-            id={tarea.idTarea}
+            key={tarea.id}
+            id={tarea.id}
             titulo={tarea.title}
             descripcion={tarea.description}
             onClick={handleAction}
           />
         ))}
+        {loader && <Loader mode="modal" />}
       </div>
       <DialogTareaAdd open={showAdd} setOpen={setShowAdd} />
       <DialogTareaEdit
