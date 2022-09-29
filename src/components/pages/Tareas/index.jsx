@@ -95,7 +95,11 @@ const Tareas = () => {
         ))}
         {loader && <Loader mode="modal" />}
       </div>
-      <DialogTareaAdd open={showAdd} setOpen={setShowAdd} />
+      <DialogTareaAdd
+        open={showAdd}
+        setOpen={setShowAdd}
+        onDismiss={cargarTareas}
+      />
       <DialogTareaEdit
         idTarea={idTarea}
         open={showEdit}

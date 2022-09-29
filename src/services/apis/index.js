@@ -1,2 +1,2 @@
 export { apiLogin } from './auth/apiAuth';
-export { apiGetTasks } from './tasks/apiTask';
+export { apiGetTasks, apiPostTask } from './tasks/apiTask';

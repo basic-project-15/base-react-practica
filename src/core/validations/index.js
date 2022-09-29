@@ -4,3 +4,4 @@ export {
   validInputInitialNumbers,
 } from './validateInput';
 export { formValidLogin } from './validLogin';
+export { formValidTask } from './validTasks';
